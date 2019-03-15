@@ -15,8 +15,7 @@ edit_uri: https://github.com/hhu-bsinfo/hhu-bsinfo.github.io/edit/development/do
 
 nav:
     - Home: index.md
-    - User Guide: user-guide.md
-    - Bug Tracker: https://github.com/hhu-bsinfo/dxram/issues
+    - GitHub Issues: https://github.com/hhu-bsinfo/dxram/issues
     
 extra:
   social:
