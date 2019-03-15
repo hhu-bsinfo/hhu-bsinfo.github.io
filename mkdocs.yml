@@ -1,3 +1,4 @@
 site_name: DXRAM
 theme:
   name: 'material'
+remote_branch: master
