@@ -1,4 +1,24 @@
 site_name: DXRAM
+
+site_description: DXRAM User Documentation
+
 theme:
-  name: 'material'
+  name: material
+  
 remote_branch: master
+
+repo_url: https://github.com/hhu-bsinfo/dxram
+
+repo_name: hhu-bsinfo/dxram
+
+edit_uri: https://github.com/hhu-bsinfo/hhu-bsinfo.github.io/edit/development/docs
+
+nav:
+    - Home: index.md
+    - User Guide: user-guide.md
+    - Bug Tracker: https://github.com/hhu-bsinfo/dxram/issues
+    
+extra:
+  social:
+    - type: github
+      link: https://github.com/hhu-bsinfo
