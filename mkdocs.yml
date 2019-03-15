@@ -21,3 +21,10 @@ extra:
   social:
     - type: github
       link: https://github.com/hhu-bsinfo
+      
+markdown_extensions:
+    - admonition
+    - codehilite
+    - footnotes
+    - toc: 
+        permalink: true

@@ -3,6 +3,8 @@ language: python
 install:
     - pip install mkdocs
     - pip install mkdocs-material
+    - pip install pymdown-extensions
+    - pip install pygments
 
 script:
     - mkdocs build --verbose --clean --strict
