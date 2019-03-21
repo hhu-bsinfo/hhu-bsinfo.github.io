@@ -1,4 +1,6 @@
-# Welcome to MkDocs
+# DXRAM User Documentation
+
+![DXRAM logo](img/logo_color.svg){: style="width:75%;"}
 
 For full documentation visit [mkdocs.org](https://mkdocs.org).
 
