@@ -18,8 +18,11 @@ edit_uri: https://github.com/hhu-bsinfo/hhu-bsinfo.github.io/edit/development/do
 
 nav:
     - Home: index.md
+    - Technical Guidance: technical.md
+    - Documentation: docs.md
+    - GitHub Repositories: overview.md 
     - GitHub Issues: https://github.com/hhu-bsinfo/dxram/issues
-    
+
 extra:
   social:
     - type: github
