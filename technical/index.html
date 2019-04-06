@@ -775,6 +775,8 @@
 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <h3 id="scope">Scope<a class="headerlink" href="#scope" title="Permanent link">&para;</a></h3>
 <h3 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">&para;</a></h3>
+<p>The main purpose of this document is to guide the development team in setting up a development environment for the DXRAM project. 
+It also defines standards and best practices for the developers to follow using certain tools, third party libraries and policies.</p>
 <h2 id="development-environment">Development Environment<a class="headerlink" href="#development-environment" title="Permanent link">&para;</a></h2>
 <h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
 <h4 id="oracle-jdk-open-jdk">Oracle JDK / Open JDK<a class="headerlink" href="#oracle-jdk-open-jdk" title="Permanent link">&para;</a></h4>
@@ -784,8 +786,92 @@
 <h3 id="distribution">Distribution<a class="headerlink" href="#distribution" title="Permanent link">&para;</a></h3>
 <h3 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">&para;</a></h3>
 <h2 id="git-workflow">Git Workflow<a class="headerlink" href="#git-workflow" title="Permanent link">&para;</a></h2>
+<p>To prepare the environment make sure <strong>git</strong> is installed and configured properly.</p>
+<div class="codehilite"><pre><span></span>sudo apt install git
+</pre></div>
+
+
+<p>It is highly recommended to work with SSH keys. This aproach will save your time alot.
+An article about generating a new SSH key and adding it to the ssh-agent can be found <a href="https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">here</a>.
+Afterwards <a href="https://help.github.com/en/articles/adding-a-new-ssh-key-to-your-github-account">add</a> your SSH key to your GitHub account and <a href="https://help.github.com/en/articles/testing-your-ssh-connection">test</a> the connection.</p>
+<p>To finish the configuration add your email and name in the global scope.
+This information will appear in the commit history.</p>
+<div class="codehilite"><pre><span></span>git config --global user.email <span class="s2">&quot;your@email.com&quot;</span>
+git config --global user.name <span class="s2">&quot;Your Name&quot;</span>
+</pre></div>
+
+
 <h3 id="forks-and-remote-repositories">Forks and Remote Repositories<a class="headerlink" href="#forks-and-remote-repositories" title="Permanent link">&para;</a></h3>
+<p>First create a workspace directory in your home:</p>
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> <span class="o">&amp;&amp;</span> mkdir workspace <span class="o">&amp;&amp;</span> <span class="nb">cd</span> workspace
+</pre></div>
+
+
+<p>Now fork your own copy of <a href="https://github.com/hhu-bsinfo/dxram">hhu-bsinfo/dxram</a> to your account.
+Additionally it could be helpful to fork all other DXRAM repositories you are going to work with as well.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are going to develop something within DXRAM (changing DXRAM code), there is no way to circumvent the <strong>development</strong> branch.
+However, in case you are developing an independent piece of software with DXRAM as dependency, working with the <strong>master</strong> branch might be an option.</p>
+</div>
+<p>Time to clone all forked copies:</p>
+<div class="codehilite"><pre><span></span>git clone --branch<span class="o">=</span>development git@github.com:&lt;you&gt;/dxram.git
+</pre></div>
+
+
+<p>Adding the original repository <a href="https://github.com/hhu-bsinfo/dxram.git">https://github.com/hhu-bsinfo/dxram.git</a> to <em>git</em></p>
+<div class="codehilite"><pre><span></span>$ git remote add shared https://github.com/hhu-bsinfo/dxram.git
+$ git fetch --all
+Fetching origin
+Fetching shared
+From https://github.com/hhu-bsinfo/dxram
+ * <span class="o">[</span>new branch<span class="o">]</span>        development -&gt; shared/development
+ * <span class="o">[</span>new branch<span class="o">]</span>        master      -&gt; shared/master
+ * <span class="o">[</span>new tag<span class="o">]</span>           <span class="m">0</span>.3.1       -&gt; <span class="m">0</span>.3.1
+ * <span class="o">[</span>new tag<span class="o">]</span>           <span class="m">0</span>.5.0       -&gt; <span class="m">0</span>.5.0
+ * <span class="o">[</span>new tag<span class="o">]</span>           <span class="m">0</span>.6.0       -&gt; <span class="m">0</span>.6.0
+ * <span class="o">[</span>new tag<span class="o">]</span>           <span class="m">0</span>.7.0       -&gt; <span class="m">0</span>.7.0
+ * <span class="o">[</span>new tag<span class="o">]</span>           v0.4.0      -&gt; v0.4.0
+</pre></div>
+
+
+<p>allows you to get updates from the <strong>shared</strong> upstream, i.e. you want to keep <code>origin/development</code> up to date with <code>shared/development</code>.
+Checkout a new branch</p>
+<div class="codehilite"><pre><span></span>git checkout -b shared_development shared/development
+</pre></div>
+
+
+<p>to create a local read-only copy of the <em>shared</em> upstream.
+When it's time to get updates</p>
+<div class="codehilite"><pre><span></span>git checkout development
+git merge shared_development --ff-only
+</pre></div>
+
+
+<p>make sure you are on the right branch and you do fast-forward merge only!</p>
+<p>The <em>origin/development</em> branch can be used to provide a small bugfix, but the favored solution is to go with a new <em>origin/bugfix</em> or <em>origin/feature</em> branch. In both cases a <strong>Pull request</strong> is the appropriate strategy. The <code>git rebase</code> command will help you in case your <em>pull request</em> is outdated because of new commits from other contributors.</p>
 <h3 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h3>
+<p>It is a bad practice to commit some semi-finished changes (or have several different changes in one commit), but what to do in case you have to leave or switch the place which implies the need to commit and push changes upstream? Well, there is a simple solution to that. Just do it, but leave a special hint in the message which is often refered as <em>work in progress</em>:</p>
+<div class="codehilite"><pre><span></span>git add .
+git commit -m <span class="s1">&#39;WIP: whatever I started to do&#39;</span>
+git push
+</pre></div>
+
+
+<p>Whenever the work is finished the last commit (WIP) should be replaced via</p>
+<div class="codehilite"><pre><span></span>git commit --amend
+</pre></div>
+
+
+<p>and the message <code>'WIP: whatever I started to do'</code> can be edited in the text-editor that opens automatically (e.g. <em>nano</em> or <em>vim</em>).
+The drawback or complication of this workflow is that you will need to foce <code>git push -f</code> and in case of working with multiple workstation also <code>git pull --rebase</code> will be necessary. So, make sure you know what you are doing!</p>
+<p>Some other advanced but helpful technics are for instance <a href="https://git-scm.com/docs/git-stash">stash</a> and <a href="https://git-scm.com/docs/git-cherry-pick">cherry-pick</a>.</p>
+<p>Best sources and documentation for git:</p>
+<div class="codehilite"><pre><span></span>git <span class="nb">help</span> &lt;command&gt;
+</pre></div>
+
+
+<p>and the official <a href="https://git-scm.com/doc">docs</a>.</p>
 <h2 id="development-guidelines">Development Guidelines<a class="headerlink" href="#development-guidelines" title="Permanent link">&para;</a></h2>
 <h3 id="public-apis">Public APIs<a class="headerlink" href="#public-apis" title="Permanent link">&para;</a></h3>
 <h3 id="internal-apis">Internal APIs<a class="headerlink" href="#internal-apis" title="Permanent link">&para;</a></h3>
