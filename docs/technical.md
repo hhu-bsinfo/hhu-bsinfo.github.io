@@ -14,6 +14,39 @@ It also defines standards and best practices for the developers to follow using 
 ### Setup
 
 #### Oracle JDK / Open JDK
+Download the latest Java 8 Oracle JDK [jdk-8u202-linux-x64.tar.gz](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and follow the instructions [here](https://wiki.ubuntuusers.de/Java/Installation/Oracle_Java/Java_8/) for installation. To put it in a nutshell, extract the *tar* (do it all as root via `sudo su`)
+
+``` bash
+sudo su
+tar xzf jdk-8u202-linux-x64.tar.gz
+```
+move it into `/opt`
+
+``` bash
+mkdir /opt/Oracle_Java
+mv jdk1.8.0_202 /opt/Oracle_Java
+```
+and update the system accordingly (replace *VERSION* with the one you downloaded, currently 202)
+
+``` bash
+update-alternatives --install "/usr/bin/java" "java" "/opt/Oracle_Java/jdk1.8.0_VERSION/bin/java" 1
+update-alternatives --install "/usr/bin/javac" "javac" "/opt/Oracle_Java/jdk1.8.0_VERSION/bin/javac" 1
+update-alternatives --install "/usr/bin/javaws" "javaws" "/opt/Oracle_Java/jdk1.8.0_VERSION/bin/javaws" 1
+update-alternatives --install "/usr/bin/jar" "jar" "/opt/Oracle_Java/jdk1.8.0_VERSION/bin/jar" 1 
+
+update-alternatives --set "java" "/opt/Oracle_Java/jdk1.8.0_VERSION/bin/java"
+update-alternatives --set "javac" "/opt/Oracle_Java/jdk1.8.0_VERSION/bin/javac"
+update-alternatives --set "javaws" "/opt/Oracle_Java/jdk1.8.0_VERSION/bin/javaws"
+update-alternatives --set "jar" "/opt/Oracle_Java/jdk1.8.0_VERSION/bin/jar" 
+```
+Finally test the installation via
+
+``` bash
+$ java -version
+java version "1.8.0_202"
+Java(TM) SE Runtime Environment (build 1.8.0_202-b08)
+Java HotSpot(TM) 64-Bit Server VM (build 25.202-b08, mixed mode)
+```
 
 #### IDE
 
