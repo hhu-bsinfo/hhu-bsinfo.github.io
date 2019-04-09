@@ -780,6 +780,39 @@ It also defines standards and best practices for the developers to follow using 
 <h2 id="development-environment">Development Environment<a class="headerlink" href="#development-environment" title="Permanent link">&para;</a></h2>
 <h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
 <h4 id="oracle-jdk-open-jdk">Oracle JDK / Open JDK<a class="headerlink" href="#oracle-jdk-open-jdk" title="Permanent link">&para;</a></h4>
+<p>Download the latest Java 8 Oracle JDK <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">jdk-8u202-linux-x64.tar.gz</a> and follow the instructions <a href="https://wiki.ubuntuusers.de/Java/Installation/Oracle_Java/Java_8/">here</a> for installation. To put it in a nutshell, extract the <em>tar</em> (do it all as root via <code>sudo su</code>)</p>
+<div class="codehilite"><pre><span></span>sudo su
+tar xzf jdk-8u202-linux-x64.tar.gz
+</pre></div>
+
+
+<p>move it into <code>/opt</code></p>
+<div class="codehilite"><pre><span></span>mkdir /opt/Oracle_Java
+mv jdk1.8.0_202 /opt/Oracle_Java
+</pre></div>
+
+
+<p>and update the system accordingly (replace <em>VERSION</em> with the one you downloaded, currently 202)</p>
+<div class="codehilite"><pre><span></span>update-alternatives --install <span class="s2">&quot;/usr/bin/java&quot;</span> <span class="s2">&quot;java&quot;</span> <span class="s2">&quot;/opt/Oracle_Java/jdk1.8.0_VERSION/bin/java&quot;</span> <span class="m">1</span>
+update-alternatives --install <span class="s2">&quot;/usr/bin/javac&quot;</span> <span class="s2">&quot;javac&quot;</span> <span class="s2">&quot;/opt/Oracle_Java/jdk1.8.0_VERSION/bin/javac&quot;</span> <span class="m">1</span>
+update-alternatives --install <span class="s2">&quot;/usr/bin/javaws&quot;</span> <span class="s2">&quot;javaws&quot;</span> <span class="s2">&quot;/opt/Oracle_Java/jdk1.8.0_VERSION/bin/javaws&quot;</span> <span class="m">1</span>
+update-alternatives --install <span class="s2">&quot;/usr/bin/jar&quot;</span> <span class="s2">&quot;jar&quot;</span> <span class="s2">&quot;/opt/Oracle_Java/jdk1.8.0_VERSION/bin/jar&quot;</span> <span class="m">1</span> 
+
+update-alternatives --set <span class="s2">&quot;java&quot;</span> <span class="s2">&quot;/opt/Oracle_Java/jdk1.8.0_VERSION/bin/java&quot;</span>
+update-alternatives --set <span class="s2">&quot;javac&quot;</span> <span class="s2">&quot;/opt/Oracle_Java/jdk1.8.0_VERSION/bin/javac&quot;</span>
+update-alternatives --set <span class="s2">&quot;javaws&quot;</span> <span class="s2">&quot;/opt/Oracle_Java/jdk1.8.0_VERSION/bin/javaws&quot;</span>
+update-alternatives --set <span class="s2">&quot;jar&quot;</span> <span class="s2">&quot;/opt/Oracle_Java/jdk1.8.0_VERSION/bin/jar&quot;</span> 
+</pre></div>
+
+
+<p>Finally test the installation via</p>
+<div class="codehilite"><pre><span></span>$ java -version
+java version <span class="s2">&quot;1.8.0_202&quot;</span>
+Java<span class="o">(</span>TM<span class="o">)</span> SE Runtime Environment <span class="o">(</span>build <span class="m">1</span>.8.0_202-b08<span class="o">)</span>
+Java HotSpot<span class="o">(</span>TM<span class="o">)</span> <span class="m">64</span>-Bit Server VM <span class="o">(</span>build <span class="m">25</span>.202-b08, mixed mode<span class="o">)</span>
+</pre></div>
+
+
 <h4 id="ide">IDE<a class="headerlink" href="#ide" title="Permanent link">&para;</a></h4>
 <h4 id="other-tools">Other tools<a class="headerlink" href="#other-tools" title="Permanent link">&para;</a></h4>
 <h3 id="build-automation-with-gradle">Build Automation with Gradle<a class="headerlink" href="#build-automation-with-gradle" title="Permanent link">&para;</a></h3>
